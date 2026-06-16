@@ -1,6 +1,6 @@
 {
-  "name": "brainvault-cc-marketplace",
-  "description": "Personal marketplace for brainvault-cc plugin",
+  "name": "brainvault-cc",
+  "description": "Marketplace entry for the brainvault-cc Claude Code plugin",
   "owner": {
     "name": "YOUR_NAME",
     "email": "YOUR_EMAIL"
@@ -8,9 +8,11 @@
   "plugins": [
     {
       "name": "brainvault-cc",
-      "description": "Obsidian-based persistent memory system for Claude Code",
+      "description": "Obsidian-based persistent memory system for Claude Code — Brain Mode: versioned vault with migrations, solution memories and history tracking",
       "version": "0.1.0",
       "source": "./",
+      "homepage": "https://github.com/YOUR_GITHUB/brainvault-cc",
+      "repository": "https://github.com/YOUR_GITHUB/brainvault-cc",
       "author": {
         "name": "YOUR_NAME",
         "email": "YOUR_EMAIL"
