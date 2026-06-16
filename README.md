@@ -27,12 +27,12 @@ BrainVault turns your Claude Code assistant into a learning system. After each s
 
 Option A — via marketplace URL (once published):
 ```bash
-claude plugin install https://github.com/YOUR_GITHUB/brainvault-cc
+claude plugin install https://github.com/Francesco070/brainvault-cc
 ```
 
 Option B — local install from this repo:
 ```bash
-git clone https://github.com/YOUR_GITHUB/brainvault-cc
+git clone https://github.com/Francesco070/brainvault-cc
 claude plugin install ./brainvault-cc
 ```
 
@@ -40,7 +40,7 @@ claude plugin install ./brainvault-cc
 
 ```bash
 # Replace the path with your Obsidian/Memories directory
-~/.claude/plugins/cache/YOUR_MARKETPLACE/brainvault-cc/VERSION/scripts/init-or-update-vault.sh \
+~/.claude/plugins/cache/Francesco070/brainvault-cc/0.1.0/scripts/init-or-update-vault.sh \
   --vault /path/to/your/Obsidian/Claude/Memories
 ```
 
@@ -61,13 +61,13 @@ Memories/
 
 Copy the template and replace `{{VAULT_PATH}}`:
 ```bash
-cp ~/.claude/plugins/cache/YOUR_MARKETPLACE/brainvault-cc/VERSION/CLAUDE.md.template ~/CLAUDE.md
+cp ~/.claude/plugins/cache/Francesco070/brainvault-cc/0.1.0/CLAUDE.md.template ~/CLAUDE.md
 # Edit ~/CLAUDE.md — replace all {{VAULT_PATH}} occurrences with your actual path
 ```
 
 Or append it to an existing `~/CLAUDE.md`:
 ```bash
-cat ~/.claude/plugins/cache/YOUR_MARKETPLACE/brainvault-cc/VERSION/CLAUDE.md.template >> ~/CLAUDE.md
+cat ~/.claude/plugins/cache/Francesco070/brainvault-cc/0.1.0/CLAUDE.md.template >> ~/CLAUDE.md
 ```
 
 ---
