@@ -1,0 +1,133 @@
+# Claude Code — BrainVault Configuration
+#
+# SETUP: Replace {{VAULT_PATH}} with the absolute path to your Memories folder.
+# Example: /home/alice/Obsidian/Claude/Memories
+# Then remove this comment block and copy this file to ~/CLAUDE.md
+# (or append it to your existing ~/CLAUDE.md).
+
+---
+
+## BRAIN MODE: Memory is My Working Memory
+
+The vault is not just a store — it is the AI's brain. Treat it accordingly.
+
+### What This Means
+
+**Learn actively:** When something new is discovered (solution, pattern, project fact), write it to the appropriate memory file immediately.
+
+**Link knowledge:** When two things belong together, note it in both files with `[[wikilinks]]`.
+
+**Recognise patterns:** The same problem in multiple projects → one Solution Memory or a cross-reference note.
+
+**Self-correct:** When a memory is wrong or stale, fix it on the spot.
+
+---
+
+## Memory Behaviour During Sessions
+
+### Session Start — ALWAYS
+1. `MEMORY.md` is loaded automatically (it is the index).
+2. When a concrete task is named:
+   - Read `project/proj-{project-name}.md` — stack, context, quirks.
+   - Search `solutions/` for related past solutions.
+3. No exceptions. Read first, act second.
+
+### During Work
+- New project information discovered → add to `project/proj-{project-name}.md` immediately.
+- Memory found to be wrong → fix it immediately.
+- Two things discovered to be connected → add `[[wikilinks]]` in both files.
+
+### After Completing a Task — ALWAYS
+1. **Create Solution Memory** (`solutions/sol-{project}-{topic}.md`) — problem, root cause, solution, insights.
+2. **Update Project Memory** if new facts were discovered.
+3. **Fix other memories** if errors were spotted.
+4. **Write History entry** — one entry in `history/YYYY-MM-DD.md` summarising what changed in the memory system.
+5. **Check MEMORY.md** — add new index entries if needed.
+
+### Session End — ALWAYS
+Check `MEMORY.md` → add new index entries if needed.
+
+---
+
+## Vault (Memory System)
+
+### Paths
+
+| Purpose | Path |
+|---|---|
+| Memory Index | `{{VAULT_PATH}}/MEMORY.md` |
+| User Memories | `{{VAULT_PATH}}/user/` |
+| Feedback Memories | `{{VAULT_PATH}}/feedback/` |
+| Project Memories | `{{VAULT_PATH}}/project/` |
+| Reference Memories | `{{VAULT_PATH}}/reference/` |
+| Solution Memories | `{{VAULT_PATH}}/solutions/` |
+| History (daily files) | `{{VAULT_PATH}}/history/` |
+| History Index | `{{VAULT_PATH}}/HISTORY.md` |
+
+### Memory Types and Frontmatter
+
+```yaml
+---
+name: kebab-case-slug
+description: one line — what this is about
+metadata:
+  type: user | feedback | project | reference | solution
+---
+```
+
+**Feedback memories** additionally require `**Why:**` and `**How to apply:**` lines.
+**Project memories** additionally require `**Why:**` and `**How to apply:**` lines.
+
+---
+
+## Solution Memories — When and How
+
+**When to create:** Every time a bug is fixed, a feature is implemented, or a non-trivial problem is analysed.
+
+**What to include:** Only what is non-obvious — what would save time at the next similar problem.
+
+**File name:** `sol-{project}-{topic}.md`
+
+**Format:**
+```markdown
+---
+name: sol-{project}-{topic}
+description: {problem in one sentence}
+metadata:
+  type: solution
+  project: {project-name}
+  tags: [tag1, tag2]
+  date: YYYY-MM-DD
+---
+
+## Problem
+## Root Cause / Analysis
+## Solution
+## Insights
+
+Related memories: [[proj-{project-name}]]
+```
+
+---
+
+## HISTORY.md — Memory System Changelog
+
+**Path:** `history/YYYY-MM-DD.md` (one file per day)
+**Index:** `HISTORY.md`
+
+One entry per completed task/session, written after all memory changes are done.
+
+### Format
+
+```markdown
+## HH:MM — [Task description]
+
+**New Files:**
+- [[filename]] — why created
+
+**Corrected Files:**
+- [[filename]] — Error: "what was wrong" → Fix: "what is correct now"
+
+**Updated Files:**
+- [[filename]] — what was added
+```
