@@ -60,7 +60,8 @@ fi
 # --- Run pending migrations ---
 MIGRATIONS_RUN=0
 
-for migration in $(ls "$MIGRATIONS_DIR"/*.sh 2>/dev/null | sort); do
+for migration in "$MIGRATIONS_DIR"/[0-9]*.sh; do
+  [ -f "$migration" ] || continue
   MIGRATION_FILE=$(basename "$migration")
   # Extract the leading number: 0001-foo.sh -> 0001 -> 1
   MIGRATION_NUM=$(echo "$MIGRATION_FILE" | grep -oE '^[0-9]+' | sed 's/^0*//')
