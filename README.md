@@ -25,12 +25,14 @@ BrainVault turns your Claude Code assistant into a learning system. After each s
 
 ### 1. Add the plugin
 
-Option A — via marketplace URL (once published):
+Option A — via marketplace (recommended):
 ```bash
-claude plugin install https://github.com/Francesco070/brainvault-cc
+# Register the marketplace, then install
+claude plugin marketplace add Francesco070/brainvault-cc
+claude plugin install brainvault-cc
 ```
 
-Option B — local install from this repo:
+Option B — local install from a cloned repo:
 ```bash
 git clone https://github.com/Francesco070/brainvault-cc
 claude plugin install ./brainvault-cc
@@ -74,14 +76,15 @@ cat ~/.claude/plugins/cache/Francesco070/brainvault-cc/0.1.0/CLAUDE.md.template 
 
 ## Updating the Plugin
 
-After pulling a new plugin version:
+After a new plugin version is released:
 
 ```bash
 claude plugin update brainvault-cc
 
 # Then run the migration script — it detects your current vault version and
 # applies only the missing migrations:
-scripts/init-or-update-vault.sh --vault /path/to/your/Memories
+~/.claude/plugins/cache/Francesco070/brainvault-cc/0.1.0/scripts/init-or-update-vault.sh \
+  --vault /path/to/your/Memories
 ```
 
 Migrations are **additive only** — they never delete or overwrite your existing memory files.
