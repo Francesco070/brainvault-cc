@@ -1,19 +1,19 @@
 # 🧠 BrainVault for Claude Code
 
-> Persistent, structured memory for Claude Code — backed by your Obsidian vault.
+> Persistent, structured memory for Claude Code - backed by your Obsidian vault.
 
 [![Version](https://img.shields.io/badge/version-0.2.0-5c6bc0?style=flat-square)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-4caf50?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/Claude%20Code-plugin-ff6b35?style=flat-square)](https://claude.ai/code)
 
-Claude Code forgets everything between sessions. You explain the same project context, re-share the same bug solutions, correct the same mistakes — every single time you open a new conversation.
+Claude Code forgets everything between sessions. You explain the same project context, re-share the same bug solutions, correct the same mistakes - every single time you open a new conversation.
 
 **BrainVault changes this.** After each session, Claude writes structured memory files into an Obsidian vault. At the start of the next session, it reads them back. Over time, your AI assistant builds genuine, observable knowledge of your project.
 
 ---
 
 ![BrainVault knowledge graph in Obsidian](docs/graph-preview-2.png)
-*Your AI's knowledge — visible as an Obsidian graph. Projects, solutions, and insights all connected.*
+*Your AI's knowledge - visible as an Obsidian graph. Projects, solutions, and insights all connected.*
 
 ---
 
@@ -54,7 +54,7 @@ Claude picks up where it left off
 | `feedback` | `feedback/feedback-{topic}.md` | Corrections and confirmations of Claude's behaviour |
 | `reference` | `reference/{slug}.md` | External links, dashboards, system pointers |
 
-`history/YYYY-MM-DD.md` files log what *changed in the memory system* after each session — a changelog of what was learned, not a transcript.
+`history/YYYY-MM-DD.md` files log what *changed in the memory system* after each session - a changelog of what was learned, not a transcript.
 
 ---
 
@@ -71,7 +71,7 @@ claude plugin install brainvault-cc
 /brainvault-setup
 ```
 
-The setup command auto-detects your Obsidian vault, creates the memory structure, configures `~/CLAUDE.md`, and grants Claude Code write access to the vault — one command, no manual file editing required.
+The setup command auto-detects your Obsidian vault, creates the memory structure, configures `~/CLAUDE.md`, and grants Claude Code write access to the vault - one command, no manual file editing required.
 
 ---
 
@@ -153,17 +153,17 @@ Then apply any pending migrations:
 /brainvault-setup
 ```
 
-Migrations are **additive only** — they never delete or overwrite your existing memory files.
+Migrations are **additive only** - they never delete or overwrite your existing memory files.
 
 ---
 
 ## Philosophy
 
-**Solution files, not bloated project files.** Non-trivial bug fixes get their own file (`sol-{project}-{topic}.md`) with problem, root cause, fix, and key insights. Project memory stays lean — stack and conventions, not a log of every past fix.
+**Solution files, not bloated project files.** Non-trivial bug fixes get their own file (`sol-{project}-{topic}.md`) with problem, root cause, fix, and key insights. Project memory stays lean - stack and conventions, not a log of every past fix.
 
 **Wikilinks for backlinks.** `[[wikilinks]]` between memory files create Obsidian backlinks automatically. You can see which solutions relate to which project without maintaining a manual index.
 
-**History as a memory changelog.** `history/YYYY-MM-DD.md` tracks what *changed in the memory system* — new files, corrections, additions — not the conversation itself.
+**History as a memory changelog.** `history/YYYY-MM-DD.md` tracks what *changed in the memory system* - new files, corrections, additions - not the conversation itself.
 
 ---
 
