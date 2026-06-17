@@ -38,18 +38,29 @@ git clone https://github.com/Francesco070/brainvault-cc
 claude plugin install ./brainvault-cc
 ```
 
-### 2. Initialise your vault
+### 2. Initialise your vault and configure CLAUDE.md
 
-```bash
-# Replace the path with your Obsidian/Memories directory
-~/.claude/plugins/cache/Francesco070/brainvault-cc/0.1.0/scripts/init-or-update-vault.sh \
-  --vault /path/to/your/Obsidian/Claude/Memories
+Run the setup skill inside Claude Code:
+
+```
+/brainvault-setup
 ```
 
-This creates:
+This single command:
+- Auto-detects your Obsidian vault (or asks you to provide the path)
+- Creates the full vault directory structure
+- Appends the BrainVault config to `~/CLAUDE.md` (with your vault path already filled in)
+
+You can also pass the vault path directly to skip the detection step:
+
+```
+/brainvault-setup /path/to/your/Obsidian/Claude/Memories
+```
+
+The vault structure created:
 ```
 Memories/
-├── MEMORY.md          ← auto-loaded by Claude Code (put it in CLAUDE.md context)
+├── MEMORY.md          ← auto-loaded by Claude Code
 ├── HISTORY.md
 ├── user/
 ├── project/
@@ -59,18 +70,12 @@ Memories/
 └── history/
 ```
 
-### 3. Configure CLAUDE.md
-
-Copy the template and replace `{{VAULT_PATH}}`:
-```bash
-cp ~/.claude/plugins/cache/Francesco070/brainvault-cc/0.1.0/CLAUDE.md.template ~/CLAUDE.md
-# Edit ~/CLAUDE.md — replace all {{VAULT_PATH}} occurrences with your actual path
-```
-
-Or append it to an existing `~/CLAUDE.md`:
-```bash
-cat ~/.claude/plugins/cache/Francesco070/brainvault-cc/0.1.0/CLAUDE.md.template >> ~/CLAUDE.md
-```
+> **Manual alternative:** If you prefer the shell, run the init script directly:
+> ```bash
+> ~/.claude/plugins/cache/Francesco070/brainvault-cc/0.2.0/scripts/init-or-update-vault.sh \
+>   --vault /path/to/your/Obsidian/Claude/Memories
+> ```
+> Then copy `CLAUDE.md.template` and replace all `{{VAULT_PATH}}` occurrences manually.
 
 ---
 
@@ -80,11 +85,18 @@ After a new plugin version is released:
 
 ```bash
 claude plugin update brainvault-cc
+```
 
-# Then run the migration script — it detects your current vault version and
-# applies only the missing migrations:
-~/.claude/plugins/cache/Francesco070/brainvault-cc/0.1.0/scripts/init-or-update-vault.sh \
-  --vault /path/to/your/Memories
+Then run the setup skill to apply any pending migrations:
+
+```
+/brainvault-setup
+```
+
+Or with an explicit path:
+
+```
+/brainvault-setup /path/to/your/Memories
 ```
 
 Migrations are **additive only** — they never delete or overwrite your existing memory files.
