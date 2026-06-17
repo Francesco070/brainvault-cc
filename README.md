@@ -1,143 +1,172 @@
-# brainvault-cc
+# 🧠 BrainVault for Claude Code
 
-**Obsidian-based persistent memory system for Claude Code.**
+> Persistent, structured memory for Claude Code — backed by your Obsidian vault.
 
-BrainVault turns your Claude Code assistant into a learning system. After each session, it writes structured memory files — solution archives, project context, feedback on its own behaviour — into an Obsidian vault. At the start of the next session, it reads them back. Over time, Claude stops repeating mistakes and builds genuine project knowledge.
+[![Version](https://img.shields.io/badge/version-0.2.0-5c6bc0?style=flat-square)](CHANGELOG.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-4caf50?style=flat-square)](LICENSE)
+[![Platform](https://img.shields.io/badge/Claude%20Code-plugin-ff6b35?style=flat-square)](https://claude.ai/code)
+
+Claude Code forgets everything between sessions. You explain the same project context, re-share the same bug solutions, correct the same mistakes — every single time you open a new conversation.
+
+**BrainVault changes this.** After each session, Claude writes structured memory files into an Obsidian vault. At the start of the next session, it reads them back. Over time, your AI assistant builds genuine, observable knowledge of your project.
 
 ---
 
-## Philosophy
+![BrainVault knowledge graph in Obsidian](docs/graph-preview-2.png)
+*Your AI's knowledge — visible as an Obsidian graph. Projects, solutions, and insights all connected.*
 
-**Solution Files, not bloated Project Files.** Non-trivial solutions get their own file (`sol-{project}-{topic}.md`) with problem, root cause, fix, and insights. Project memory files stay lean — they describe the project, not every past fix.
+---
 
-**Wikilinks for backlinks.** `[[wikilinks]]` between memory files create Obsidian backlinks automatically. You can see which solutions relate to which project without maintaining a manual index.
+## What changes
 
-**History as a memory changelog.** The `history/YYYY-MM-DD.md` files track what *changed in the memory system* — new files, corrections, additions. Not the task itself, but what was learned.
+| Without BrainVault | With BrainVault |
+|---|---|
+| Re-explain the tech stack every session | Auto-loaded from `project/` memory |
+| Claude repeats past mistakes | `feedback/` memories prevent recurrence |
+| Bug solutions disappear after the chat | Archived in `solutions/` forever |
+| No visibility into what Claude "knows" | Full graph visible in Obsidian |
+| Cold start on every conversation | Context already loaded from day one |
+
+---
+
+## How It Works
+
+```
+You work with Claude
+       │
+       ▼  session ends
+Claude writes structured memory files → Obsidian vault
+       │
+       ▼  next session starts
+MEMORY.md auto-loaded by Claude Code
+       │
+       ▼
+Claude picks up where it left off
+```
+
+**Five memory types, each with a purpose:**
+
+| Type | File pattern | What gets stored |
+|---|---|---|
+| `user` | `user/{slug}.md` | Your background, expertise, working style |
+| `project` | `project/proj-{name}.md` | Tech stack, conventions, current focus per project |
+| `solution` | `solutions/sol-{project}-{topic}.md` | Root cause + fix for every non-trivial bug |
+| `feedback` | `feedback/feedback-{topic}.md` | Corrections and confirmations of Claude's behaviour |
+| `reference` | `reference/{slug}.md` | External links, dashboards, system pointers |
+
+`history/YYYY-MM-DD.md` files log what *changed in the memory system* after each session — a changelog of what was learned, not a transcript.
+
+---
+
+## Quick Start
+
+```bash
+# 1. Install (in your terminal)
+claude plugin marketplace add Francesco070/brainvault-cc
+claude plugin install brainvault-cc
+```
+
+```
+# 2. Set up your vault (inside Claude Code)
+/brainvault-setup
+```
+
+The setup command auto-detects your Obsidian vault, creates the memory structure, configures `~/CLAUDE.md`, and grants Claude Code write access to the vault — one command, no manual file editing required.
 
 ---
 
 ## Installation
 
 ### Prerequisites
+
 - [Claude Code](https://claude.ai/code) installed
-- An Obsidian vault (or any directory you want to use as the memory store)
-- `bash` (macOS/Linux/WSL)
+- Obsidian (or any directory you want to use as the memory store)
+- `bash` (macOS / Linux / WSL)
 
 ### 1. Add the plugin
 
-Option A — via marketplace (recommended):
+**Via marketplace (recommended):**
 ```bash
-# Register the marketplace, then install
 claude plugin marketplace add Francesco070/brainvault-cc
 claude plugin install brainvault-cc
 ```
 
-Option B — local install from a cloned repo:
+**From a cloned repo:**
 ```bash
 git clone https://github.com/Francesco070/brainvault-cc
 claude plugin install ./brainvault-cc
 ```
 
-### 2. Initialise your vault and configure CLAUDE.md
+### 2. Initialise your vault
 
-Run the setup skill inside Claude Code:
+Run inside Claude Code:
 
 ```
 /brainvault-setup
 ```
 
-This single command:
-- Auto-detects your Obsidian vault (or asks you to provide the path)
-- Creates the full vault directory structure
-- Appends the BrainVault config to `~/CLAUDE.md` (with your vault path already filled in)
-
-You can also pass the vault path directly to skip the detection step:
+Or pass the vault path directly to skip auto-detection:
 
 ```
 /brainvault-setup /path/to/your/Obsidian/Claude/Memories
 ```
 
-The vault structure created:
+**Vault structure created:**
+
 ```
 Memories/
-├── MEMORY.md          ← auto-loaded by Claude Code
-├── HISTORY.md
-├── user/
-├── project/
-├── reference/
-├── feedback/
-├── solutions/
-└── history/
+├── MEMORY.md          ← auto-loaded by Claude Code at session start
+├── HISTORY.md         ← index of daily memory changelogs
+├── user/              ← who you are, your expertise and preferences
+├── project/           ← per-project stack, conventions, focus
+├── solutions/         ← archived bug fixes with root cause + fix
+├── feedback/          ← corrections and confirmations for Claude's behaviour
+├── reference/         ← external links, dashboards, system pointers
+└── history/           ← daily changelog of what Claude learned
 ```
 
-> **Manual alternative:** If you prefer the shell, run the init script directly:
-> ```bash
-> ~/.claude/plugins/cache/Francesco070/brainvault-cc/0.2.0/scripts/init-or-update-vault.sh \
->   --vault /path/to/your/Obsidian/Claude/Memories
-> ```
-> Then copy `CLAUDE.md.template` and replace all `{{VAULT_PATH}}` occurrences manually.
+<details>
+<summary>Manual alternative (without the skill)</summary>
+
+```bash
+~/.claude/plugins/cache/Francesco070/brainvault-cc/0.2.0/scripts/init-or-update-vault.sh \
+  --vault /path/to/your/Obsidian/Claude/Memories
+```
+
+Then copy `CLAUDE.md.template` and replace all `{{VAULT_PATH}}` occurrences manually.
+
+</details>
 
 ---
 
-## Updating the Plugin
+## Updating
 
-After a new plugin version is released:
+When a new plugin version is released:
 
 ```bash
 claude plugin update brainvault-cc
 ```
 
-Then run the setup skill to apply any pending migrations:
+Then apply any pending migrations:
 
 ```
 /brainvault-setup
-```
-
-Or with an explicit path:
-
-```
-/brainvault-setup /path/to/your/Memories
 ```
 
 Migrations are **additive only** — they never delete or overwrite your existing memory files.
 
 ---
 
-## Memory Types
+## Philosophy
 
-| Type | File pattern | When to write |
-|------|-------------|---------------|
-| `user` | `user/{slug}.md` | User preferences, background, expertise |
-| `project` | `project/proj-{name}.md` | Per-project stack, quirks, current focus |
-| `solution` | `solutions/sol-{project}-{topic}.md` | After each non-trivial fix or implementation |
-| `feedback` | `feedback/feedback-{topic}.md` | Guidance on AI behaviour — corrections and confirmations |
-| `reference` | `reference/{slug}.md` | External links, system pointers, lookup tables |
+**Solution files, not bloated project files.** Non-trivial bug fixes get their own file (`sol-{project}-{topic}.md`) with problem, root cause, fix, and key insights. Project memory stays lean — stack and conventions, not a log of every past fix.
 
----
+**Wikilinks for backlinks.** `[[wikilinks]]` between memory files create Obsidian backlinks automatically. You can see which solutions relate to which project without maintaining a manual index.
 
-## Using Templates
-
-Templates are in `templates/`. Copy the relevant one when creating a new memory file:
-
-```bash
-cp templates/solution-memory.md /path/to/Memories/solutions/sol-myproject-my-bug.md
-```
-
----
-
-## Version File
-
-Each vault contains a `.brainvault-version` file:
-```
-plugin_version=0.1.0
-last_migration=1
-updated=2026-06-16T10:00:00Z
-```
-
-This tells the migration runner what has already been applied.
+**History as a memory changelog.** `history/YYYY-MM-DD.md` tracks what *changed in the memory system* — new files, corrections, additions — not the conversation itself.
 
 ---
 
 ## License
 
-MIT
+[MIT](LICENSE)
