@@ -4,6 +4,13 @@ All notable changes to brainvault-cc are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.4.1] — 2026-08-20
+
+### Fixed
+- `scripts/vault-doctor.sh` — skip `TEMPLATE.md` scaffolding files (intentional
+  `{placeholder}` slugs, never indexed in `MEMORY.md` by design) instead of
+  flagging them as naming/indexing violations.
+
 ## [0.4.0] — 2026-08-20
 
 ### Added
