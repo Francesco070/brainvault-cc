@@ -4,6 +4,23 @@ All notable changes to brainvault-cc are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.4.0] — 2026-08-20
+
+### Added
+- `skills/brainvault-doctor/SKILL.md` + `scripts/vault-doctor.sh` — `/brainvault-doctor`:
+  checks vault structure, frontmatter, duplicate `name:` slugs, File-Size-Discipline
+  violations, and broken `MEMORY.md` links. Report-only by default; `--fix` applies only
+  safe structural repairs (missing folders/index skeletons/version file) after backing up
+  the whole vault to a timestamped folder. Never deletes or rewrites memory content —
+  judgment-requiring findings (duplicates, oversized files, broken links) are reported for
+  a human or Claude to fix deliberately. Meant to also run proactively, not just on request.
+- `skills/brainvault/SKILL.md` / `CLAUDE.md.template` — documented an optional sibling
+  folder convention (e.g. `Reports/`, `Validierung/{project}/`) for large working documents
+  that don't fit the memory schema, referenced by path from project memories.
+- `skills/brainvault/SKILL.md` — File Size Discipline now explicitly covers `MEMORY.md`
+  itself: extract a dominant project's index entries into their own `{project}-solutions-index.md`
+  once the file approaches ~150-200 lines.
+
 ## [0.3.0] — 2026-08-20
 
 ### Added

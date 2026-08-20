@@ -157,6 +157,20 @@ Migrations are **additive only** - they never delete or overwrite your existing 
 
 ---
 
+## Health check
+
+```
+/brainvault-doctor
+```
+
+Checks vault structure, frontmatter, duplicate slugs, oversized files, and broken
+`MEMORY.md` links. Report-only by default; add `--fix` to let it repair structural issues
+(missing folders, missing index skeletons) — always backed up first, never destructive.
+Claude also runs this on its own whenever something in the vault looks corrupted, not just
+when asked.
+
+---
+
 ## Philosophy
 
 **Solution files, not bloated project files.** Non-trivial bug fixes get their own file (`sol-{project}-{topic}.md`) with problem, root cause, fix, and key insights. Project memory stays lean - stack and conventions, not a log of every past fix.

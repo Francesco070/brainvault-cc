@@ -37,6 +37,14 @@ $VAULT/
 └── history/                   # YYYY-MM-DD.md daily change logs
 ```
 
+**Optional sibling folders for large working documents.** Specs, validation plans, research
+reports, or other deliverables that are too large or too task-specific to compress into a
+memory file (see "What NOT to save" below) don't belong inside `$VAULT/` at all — they get
+their own folder next to it (e.g. `$VAULT/../Reports/`, `$VAULT/../Validierung/{project}/`).
+These folders are unmanaged working documents, not memory — the doctor does not inspect their
+content. Reference them from the relevant `project/proj-*.md` file with a plain path so the
+memory system still points at them.
+
 ---
 
 ## Session Lifecycle
@@ -143,6 +151,8 @@ Large files are the main source of wasted tokens: reading one pulls in everythin
 **Solution memories** are one file per solution by design — don't turn one into a running log by appending new unrelated fixes to it. If a new problem is in the same area as an old solution, write a new `sol-*.md` and link it (`Related memories: [[sol-old-topic]]`) rather than growing the old one.
 
 **Splitting an existing oversized file:** move detail out into new topic files, leave the original as a short pointer/summary with links to the new files, and update every place that linked to the old file (`MEMORY.md` index, other files' `[[wikilinks]]`) so nothing goes stale.
+
+**`MEMORY.md` itself is not exempt.** It is read in full every session, so it needs the same discipline, just applied to index lines instead of file content. If one project's entries start dominating a section (e.g. dozens of Solution-Memory lines for the same project), pull that block out into its own `{project}-solutions-index.md` file and leave one pointer line in `MEMORY.md`. Rule of thumb: if `MEMORY.md` is approaching ~150-200 lines, it's time to extract, not to compress further.
 
 ---
 

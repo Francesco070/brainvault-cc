@@ -66,6 +66,10 @@ Check `MEMORY.md` → add new index entries if needed.
 | History (daily files) | `{{VAULT_PATH}}/history/` |
 | History Index | `{{VAULT_PATH}}/HISTORY.md` |
 
+**Optional:** large working documents that don't fit the memory schema (specs, validation
+plans, research reports) get their own folder next to `{{VAULT_PATH}}` instead of a memory
+file, referenced by path from the relevant project memory.
+
 ### Memory Types and Frontmatter
 
 ```yaml
