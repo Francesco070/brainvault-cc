@@ -93,6 +93,13 @@ for t in $TYPES; do
   [ -d "$DIR" ] || continue
   while IFS= read -r -d '' f; do
     REL="${f#"$VAULT_PATH"/}"
+    BASENAME=$(basename "$f" .md)
+
+    # TEMPLATE.md files are intentional copy-paste scaffolding, not real
+    # memories — they use placeholder {slugs} on purpose. Skip all checks.
+    if [ "$BASENAME" = "TEMPLATE" ]; then
+      continue
+    fi
 
     # Frontmatter presence
     if ! head -1 "$f" | grep -q '^---$'; then
@@ -102,7 +109,6 @@ for t in $TYPES; do
 
     NAME=$(sed -n '2,/^---$/p' "$f" | grep -m1 '^name:' | sed 's/^name: *//' | tr -d '"' | tr -d "'")
     TYPE=$(sed -n '2,/^---$/p' "$f" | grep -m1 '^  type:' | sed 's/^  type: *//' | tr -d '"' | tr -d "'")
-    BASENAME=$(basename "$f" .md)
 
     [ -n "$NAME" ]  || note_error "$REL: frontmatter missing 'name:'"
     [ -n "$TYPE" ]  || note_error "$REL: frontmatter missing 'metadata.type:'"
