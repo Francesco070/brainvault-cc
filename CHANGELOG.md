@@ -4,6 +4,13 @@ All notable changes to brainvault-cc are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.5.1] — 2026-08-20
+
+### Fixed
+- `README.md` — version badge and the manual-install path example still said
+  `0.2.0`, three releases stale. Manual path is now version-agnostic instead
+  of hardcoding a value that goes stale on every release.
+
 ## [0.5.0] — 2026-08-20
 
 ### Added

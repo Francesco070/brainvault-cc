@@ -2,7 +2,7 @@
 
 > Persistent, structured memory for Claude Code - backed by your Obsidian vault.
 
-[![Version](https://img.shields.io/badge/version-0.5.0-5c6bc0?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.5.1-5c6bc0?style=flat-square)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-4caf50?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/Claude%20Code-plugin-ff6b35?style=flat-square)](https://claude.ai/code)
 
