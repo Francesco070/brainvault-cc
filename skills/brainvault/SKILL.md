@@ -34,6 +34,7 @@ $VAULT/
 ├── reference/                 # External pointers and lookup tables
 ├── feedback/                  # Guidance on how to behave
 ├── solutions/                 # Non-trivial solutions archive
+├── agents/                    # Which agent/subagent was used for which task, and why
 └── history/                   # YYYY-MM-DD.md daily change logs
 ```
 
@@ -66,10 +67,11 @@ memory system still points at them.
 ### After Completing a Task — ALWAYS
 
 1. **Create Solution Memory** (`solutions/sol-{project}-{topic}.md`) — problem, root cause, solution, insights.
-2. **Update Project Memory** if new facts were discovered.
-3. **Fix other memories** if errors were spotted.
-4. **Write History entry** — one entry in `history/YYYY-MM-DD.md` summarising what changed in the memory system.
-5. **Check MEMORY.md** — add new index entries if needed.
+2. **If an agent or subagent was dispatched for the task, create an Agent Memory** (see below) — but only if the dispatch is worth finding again later, same bar as a Solution Memory.
+3. **Update Project Memory** if new facts were discovered.
+4. **Fix other memories** if errors were spotted.
+5. **Write History entry** — one entry in `history/YYYY-MM-DD.md` summarising what changed in the memory system.
+6. **Check MEMORY.md** — add new index entries if needed.
 
 ### Session End — ALWAYS
 
@@ -86,7 +88,7 @@ Every memory file starts with:
 name: kebab-case-slug
 description: one line — what this is about
 metadata:
-  type: user | feedback | project | reference | solution
+  type: user | feedback | project | reference | solution | agent
 ---
 ```
 
@@ -135,6 +137,51 @@ Related memories: [[proj-{project-name}]], [[sol-{similar-topic}]]
 - Trivial changes (typos, simple config)
 - Things directly readable from the code
 - Details that belong in the commit message
+
+---
+
+## Agent Memory Format
+
+**Purpose:** when a task used an agent or subagent (a built-in role like `engineering-backend-architect`, `general-purpose`, or a bespoke one-off prompt dispatched via the Agent/Task tool), record which one, for what kind of problem, and how it was set up — so a future similar problem can find and reuse or clone the same dispatch instead of re-deriving it from scratch.
+
+**When to create:** Same bar as a Solution Memory — only when the dispatch is non-trivial and worth finding again. A quick one-shot `Explore` lookup doesn't need one; a carefully-scoped agent that solved a real problem well does.
+
+**File name:** `agent-{topic}.md` — e.g. `agent-fabbrica-code-review.md`
+
+```markdown
+---
+name: agent-{topic}
+description: {one sentence — what kind of task this agent/prompt is good for}
+metadata:
+  type: agent
+  agent_type: {built-in role name, or "custom" for a one-off prompt}
+  project: {project-name, or "cross-project" if reusable everywhere}
+  tags: [tag1, tag2]
+  date: YYYY-MM-DD
+---
+
+## Aufgabe
+{What was the task? What made it a good fit for delegating to an agent rather than doing it inline?}
+
+## Agent / Prompt
+{The subagent_type used, and the prompt (trimmed of task-specific facts that don't
+generalise — keep names/dates/paths that matter, drop ones that don't). Kept verbatim
+enough to copy-paste and adapt for a similar case.}
+
+## Ergebnis
+{How did it go? Quality of the output, anything that needed correcting afterwards.}
+
+## Wiederverwendbar für
+{What class of future problem should reach for this agent/prompt? What would need to
+change to adapt it?}
+
+Related memories: [[proj-{project-name}]], [[sol-{related-solution}]]
+```
+
+**Do NOT include in Agent Memories:**
+- Routine, unremarkable dispatches (a plain `Explore` search, a trivial fresh-agent lookup)
+- The full raw transcript/output of the agent run — only the prompt/setup and a summary of the result
+- Anything already fully captured in a linked Solution Memory; link to it instead of duplicating
 
 ---
 
@@ -198,6 +245,9 @@ Only include the sections that are relevant. `[[wikilinks]]` create Obsidian bac
 
 ## Solutions
 - [Short Title](solutions/sol-name.md) — one-line hook
+
+## Agents
+- [Short Title](agents/agent-name.md) — one-line hook: what kind of task this agent/prompt fits
 
 ## Reference
 - [Short Title](reference/filename.md) — one-line hook

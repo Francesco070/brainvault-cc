@@ -44,13 +44,14 @@ MEMORY.md auto-loaded by Claude Code
 Claude picks up where it left off
 ```
 
-**Five memory types, each with a purpose:**
+**Six memory types, each with a purpose:**
 
 | Type | File pattern | What gets stored |
 |---|---|---|
 | `user` | `user/{slug}.md` | Your background, expertise, working style |
 | `project` | `project/proj-{name}.md` | Tech stack, conventions, current focus per project |
 | `solution` | `solutions/sol-{project}-{topic}.md` | Root cause + fix for every non-trivial bug |
+| `agent` | `agents/agent-{topic}.md` | Which agent/subagent (and prompt) fit which kind of task, for reuse |
 | `feedback` | `feedback/feedback-{topic}.md` | Corrections and confirmations of Claude's behaviour |
 | `reference` | `reference/{slug}.md` | External links, dashboards, system pointers |
 
@@ -120,6 +121,7 @@ Memories/
 ├── user/              ← who you are, your expertise and preferences
 ├── project/           ← per-project stack, conventions, focus
 ├── solutions/         ← archived bug fixes with root cause + fix
+├── agents/            ← which agent/subagent (and prompt) fit which task, for reuse
 ├── feedback/          ← corrections and confirmations for Claude's behaviour
 ├── reference/         ← external links, dashboards, system pointers
 └── history/           ← daily changelog of what Claude learned

@@ -8,7 +8,7 @@
 
 set -euo pipefail
 
-PLUGIN_VERSION="0.1.0"
+PLUGIN_VERSION="0.5.0"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PLUGIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 MIGRATIONS_DIR="$PLUGIN_ROOT/migrations"

@@ -4,6 +4,21 @@ All notable changes to brainvault-cc are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.5.0] — 2026-08-20
+
+### Added
+- Sixth memory type: **agent**. `agents/agent-{topic}.md` records which agent/subagent
+  (built-in role or bespoke one-off prompt) was dispatched for which kind of task, with
+  the prompt kept close to verbatim so a similar future problem can reuse or clone it
+  instead of re-deriving the setup. Same "only if non-trivial and worth reusing" bar as
+  Solution Memories.
+- `templates/agent-memory.md`, `migrations/0002-add-agents-folder.sh` (idempotent: creates
+  `agents/`, adds a `## Agents` section to `MEMORY.md`), `scripts/vault-doctor.sh` now
+  checks `agents/` alongside the other five typed folders.
+- `skills/brainvault/SKILL.md` / `CLAUDE.md.template` — new "Agent Memory Format" section,
+  `agent` added to the type enum, "After Completing a Task" now includes an agent-memory
+  step when a dispatch happened.
+
 ## [0.4.1] — 2026-08-20
 
 ### Fixed

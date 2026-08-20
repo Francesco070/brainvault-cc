@@ -15,8 +15,8 @@
 
 set -uo pipefail
 
-PLUGIN_VERSION="0.4.0"
-TYPES="user project reference feedback solutions"
+PLUGIN_VERSION="0.5.0"
+TYPES="user project reference feedback solutions agents"
 
 VAULT_PATH=""
 DO_FIX=false
@@ -118,6 +118,7 @@ for t in $TYPES; do
     if [ -n "$TYPE" ]; then
       EXPECTED_TYPE="$t"
       [ "$t" = "solutions" ] && EXPECTED_TYPE="solution"
+      [ "$t" = "agents" ] && EXPECTED_TYPE="agent"
       if [ "$TYPE" != "$EXPECTED_TYPE" ]; then
         note_warn "$REL: metadata.type '$TYPE' does not match its folder ($t, expected '$EXPECTED_TYPE')"
       fi

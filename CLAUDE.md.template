@@ -41,10 +41,11 @@ The vault is not just a store — it is the AI's brain. Treat it accordingly.
 
 ### After Completing a Task — ALWAYS
 1. **Create Solution Memory** (`solutions/sol-{project}-{topic}.md`) — problem, root cause, solution, insights.
-2. **Update Project Memory** if new facts were discovered.
-3. **Fix other memories** if errors were spotted.
-4. **Write History entry** — one entry in `history/YYYY-MM-DD.md` summarising what changed in the memory system.
-5. **Check MEMORY.md** — add new index entries if needed.
+2. **If an agent/subagent was dispatched, create an Agent Memory** (`agents/agent-{topic}.md`) — same bar as a Solution Memory: only if worth finding and reusing later.
+3. **Update Project Memory** if new facts were discovered.
+4. **Fix other memories** if errors were spotted.
+5. **Write History entry** — one entry in `history/YYYY-MM-DD.md` summarising what changed in the memory system.
+6. **Check MEMORY.md** — add new index entries if needed.
 
 ### Session End — ALWAYS
 Check `MEMORY.md` → add new index entries if needed.
@@ -63,6 +64,7 @@ Check `MEMORY.md` → add new index entries if needed.
 | Project Memories | `{{VAULT_PATH}}/project/` |
 | Reference Memories | `{{VAULT_PATH}}/reference/` |
 | Solution Memories | `{{VAULT_PATH}}/solutions/` |
+| Agent Memories | `{{VAULT_PATH}}/agents/` |
 | History (daily files) | `{{VAULT_PATH}}/history/` |
 | History Index | `{{VAULT_PATH}}/HISTORY.md` |
 
@@ -77,7 +79,7 @@ file, referenced by path from the relevant project memory.
 name: kebab-case-slug
 description: one line — what this is about
 metadata:
-  type: user | feedback | project | reference | solution
+  type: user | feedback | project | reference | solution | agent
 ---
 ```
 
@@ -110,6 +112,40 @@ metadata:
 ## Root Cause / Analysis
 ## Solution
 ## Insights
+
+Related memories: [[proj-{project-name}]]
+```
+
+---
+
+## Agent Memories — When and How
+
+**When to create:** Whenever an agent/subagent (built-in role or a bespoke one-off prompt) was
+dispatched for a task and the setup is worth finding and reusing next time a similar problem
+comes up. Not for routine, unremarkable dispatches.
+
+**What to include:** The subagent_type used and the prompt (trimmed of task-specific facts that
+don't generalise), so it can be copy-pasted and adapted next time — not the raw transcript.
+
+**File name:** `agent-{topic}.md`
+
+**Format:**
+```markdown
+---
+name: agent-{topic}
+description: {what kind of task this agent/prompt is good for}
+metadata:
+  type: agent
+  agent_type: {built-in role name, or "custom"}
+  project: {project-name, or "cross-project"}
+  tags: [tag1, tag2]
+  date: YYYY-MM-DD
+---
+
+## Aufgabe
+## Agent / Prompt
+## Ergebnis
+## Wiederverwendbar für
 
 Related memories: [[proj-{project-name}]]
 ```

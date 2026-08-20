@@ -1,7 +1,7 @@
 {
   "name": "brainvault-cc",
   "description": "Obsidian-based persistent memory system for Claude Code — Brain Mode: versioned vault with migrations, solution memories and history tracking",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "author": {
     "name": "Francesco",
     "email": "f.palazzo@frnc.cloud"
