@@ -4,6 +4,15 @@ All notable changes to brainvault-cc are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning: [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] — 2026-08-20
+
+### Added
+- `skills/brainvault/SKILL.md` — new "File Size Discipline" convention: files should stay small and
+  topic-atomic (~100-150 lines guideline); project memories stay a compact overview with detail
+  pushed into linked Solution Memories; Solution memories are one file per solution, never a running
+  log. Large existing files cost tokens on every read regardless of task relevance.
+- `CLAUDE.md.template` — condensed version of the same rule.
+
 ## [0.2.0] — 2026-06-17
 
 ### Added

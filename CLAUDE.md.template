@@ -21,6 +21,8 @@ The vault is not just a store — it is the AI's brain. Treat it accordingly.
 
 **Self-correct:** When a memory is wrong or stale, fix it on the spot.
 
+**Stay atomic:** One file, one topic. Prefer several small linked files over one file that keeps accumulating everything about a project or theme — every read of a bloated file wastes tokens on parts irrelevant to the current task. Guideline: split when a file pushes past ~100-150 lines. Project memories should stay a compact overview (detail goes into linked Solution Memories); Solution memories are one file per solution, not a running log.
+
 ---
 
 ## Memory Behaviour During Sessions

@@ -17,6 +17,8 @@ The vault is not just a store — it is the AI's working memory. Treat it accord
 
 **Self-correct:** When a memory is wrong or stale, fix it on the spot.
 
+**Stay atomic:** One file, one topic. A file that keeps growing forever costs more tokens every time it is read, and buries the parts relevant to the current task inside parts that aren't. Prefer several small linked files over one file that accumulates everything about a project or a theme.
+
 ---
 
 ## Vault Layout
@@ -125,6 +127,22 @@ Related memories: [[proj-{project-name}]], [[sol-{similar-topic}]]
 - Trivial changes (typos, simple config)
 - Things directly readable from the code
 - Details that belong in the commit message
+
+---
+
+## File Size Discipline
+
+Large files are the main source of wasted tokens: reading one pulls in everything it has ever accumulated, most of it irrelevant to the task at hand.
+
+**Guideline, not a hard limit:** if a file is pushing past roughly 100–150 lines, that's the signal to split it — not a reason to panic at 151.
+
+**Before writing to an existing file:** check its current size. If it's already large, don't append — create a new, more specific file and link it instead.
+
+**Project memories** (`project/proj-*.md`) drift into this the most. Keep them to current stack, current state, and quirks that don't fit anywhere else. When a project accumulates enough history to make the file long, split by sub-topic (e.g. `proj-fabbrica.md` stays the compact overview; `proj-fabbrica-billing.md`, `proj-fabbrica-mcp.md` etc. hold the deep detail) and link both directions with `[[wikilinks]]`. Detailed narrative belongs in Solution Memories, not in the project file.
+
+**Solution memories** are one file per solution by design — don't turn one into a running log by appending new unrelated fixes to it. If a new problem is in the same area as an old solution, write a new `sol-*.md` and link it (`Related memories: [[sol-old-topic]]`) rather than growing the old one.
+
+**Splitting an existing oversized file:** move detail out into new topic files, leave the original as a short pointer/summary with links to the new files, and update every place that linked to the old file (`MEMORY.md` index, other files' `[[wikilinks]]`) so nothing goes stale.
 
 ---
 
